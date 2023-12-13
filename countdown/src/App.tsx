@@ -1,5 +1,5 @@
 
-import { Route, Routes, redirect, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import { Timer } from './components/timer/Timer.js'
 import { SelectCountdown } from './pages/SelectCountdown.tsx'
@@ -17,7 +17,7 @@ const initItem: ICountdown = {
 
 function App() {
   const [activeItem, setActiveItem] = useState<ICountdown>(initItem)
-  const navigate = useNavigate();
+
 
   return (
     <div className='timer-container'>

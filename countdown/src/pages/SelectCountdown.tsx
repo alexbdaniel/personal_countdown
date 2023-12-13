@@ -1,7 +1,7 @@
 import './SelectCountdown.css'
 import { countdownData, ICountdown } from '../assets/countdownData.tsx'
 import { NavLink } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 interface IActiveItem {
   activeItem: ICountdown,

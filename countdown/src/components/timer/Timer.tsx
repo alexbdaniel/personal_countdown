@@ -1,9 +1,9 @@
-import { useEffect, useState, useMemo, useRef } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import './Timer.css'
 import { GetDuration } from './GetDuration.tsx';
-import { DateTime, DurationObjectUnits } from 'luxon'
-import { ICountdown } from '../../assets/countdownData.tsx';
-import { useFetcher, useNavigate, useParams } from 'react-router-dom';
+import { DurationObjectUnits } from 'luxon'
+
+import { useNavigate, useParams } from 'react-router-dom';
 import { countdownData } from '../../assets/countdownData.tsx';
 import { DateTime as LuxonDateTime } from 'luxon';
 
@@ -93,7 +93,6 @@ export const Timer = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const renderCount = useRef(0);
   const navigate = useNavigate();
   const { id } = useParams(); //fkn amazing, it took so long, always read docs
   const urlId = id
