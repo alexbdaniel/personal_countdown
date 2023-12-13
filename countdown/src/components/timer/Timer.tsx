@@ -45,12 +45,12 @@ const getLabels = (days: number, hours: number, minutes: number, seconds: number
 //to pass as prop
 // const target: string = '2023-12-25T23:00:00.000Z';
 
-const placeholder = {
-  days: 0,
-  minutes: 0,
-  hours: 0,
-  seconds: 0
-}
+// const placeholder = {
+//   days: 0,
+//   minutes: 0,
+//   hours: 0,
+//   seconds: 0
+// }
 
 interface ILabels {
   day: string,
