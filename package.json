@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "luxon": "^3.4.4",
+    "react-router-dom": "^6.20.1"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.3.7"
+  }
+}
