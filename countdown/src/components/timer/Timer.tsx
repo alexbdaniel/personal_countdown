@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useRef } from 'react'
 import './Timer.css'
 import { GetDuration } from './GetDuration.tsx';
 import { DurationObjectUnits } from 'luxon'
@@ -84,7 +84,29 @@ const getTargetDateTimeLabel = (target: LuxonDateTime | undefined): string | und
   return `${target?.toFormat("cccc',' d LLLL y 'at' HH:mm '(UTC'ZZ')'")}`;
 }
 
+const getDocTitle = (urlId: string | undefined): string => {
+  let docTitle: string = 'Unknown Countdown';
+  if (!urlId) return docTitle;
+  try {
+    const displayName: string | undefined = countdownData.find(i => i.urlName ===urlId)?.displayNameShort;
+    if (displayName) {
+      docTitle = `${displayName} Countdown`;
+    } 
+  } catch {
+    return docTitle;
+  } finally {
+    return docTitle;
+  }
+  return docTitle;
+}
 
+const setDocTitle = (docTitle: string): void => {
+  try {
+    document.title = docTitle
+  } catch {
+    document.title = 'Unknown Countdown'
+  }
+}
 
 export const Timer = () => {
   const [labels, setLabels] = useState<ILabels>();
@@ -93,14 +115,20 @@ export const Timer = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
+  const refCount = useRef(0); refCount.current++
   const navigate = useNavigate();
   const { id } = useParams(); //fkn amazing, it took so long, always read docs
   const urlId = id
 
   const target: LuxonDateTime | undefined = useMemo(() => getTarget(urlId), [urlId]);
   let targetDateTimeLabel: string | undefined = useMemo(() => getTargetDateTimeLabel(target), [target]);
-  
-  // console.log(renderCount.current++)
+  const docTitle: string = useMemo(() => getDocTitle(urlId), [urlId]);
+
+  useEffect(() => {
+    if (refCount.current >= 2) return;
+    setDocTitle(docTitle);
+  },[])
+
 
   const setTimes = (target: LuxonDateTime) => {
     if (!target) return;

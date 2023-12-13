@@ -12,6 +12,10 @@ export const SelectCountdown = ({activeItem, setActiveItem}: IActiveItem) => {
   // const [activeItemId, setActiveItemId] = useState('')
 
   useEffect(() => {
+    document.title = 'Countdowns';
+  },[])
+
+  useEffect(() => {
 
   }, [activeItem])
 
