@@ -7,6 +7,7 @@ import { PageNotFound } from './pages/PageNotFound.tsx'
 import { useState } from 'react'
 import { ICountdown } from './assets/countdownData.tsx'
 
+
 const initItem: ICountdown = {
   id: 'x',
   urlName: '',
@@ -24,8 +25,8 @@ function App() {
       
       <Routes>
         
-        <Route path='/' element={<SelectCountdown activeItem={activeItem} setActiveItem={setActiveItem}/>}/>
-        <Route path='/:id' element={<Timer/>}/>
+        <Route path='/' element={<SelectCountdown activeItem={activeItem} setActiveItem={setActiveItem} />} />
+        <Route path='/:id' element={<Timer/>} caseSensitive={false}/>
     
         <Route path='*' element={<PageNotFound/>}/>
       </Routes>

@@ -108,34 +108,48 @@ const setDocTitle = (docTitle: string): void => {
   }
 }
 
+const checkTargetExists = (target: any):boolean => {
+  if (target) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 export const Timer = () => {
   const [labels, setLabels] = useState<ILabels>();
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const refCount = useRef(0); refCount.current++
   const navigate = useNavigate();
   const { id } = useParams(); //fkn amazing, it took so long, always read docs
-  const urlId = id
+  const urlId = id?.toLowerCase()
+ 
+
+
 
   const target: LuxonDateTime | undefined = useMemo(() => getTarget(urlId), [urlId]);
+
   let targetDateTimeLabel: string | undefined = useMemo(() => getTargetDateTimeLabel(target), [target]);
   const docTitle: string = useMemo(() => getDocTitle(urlId), [urlId]);
+
+  
+ 
 
   useEffect(() => {
     if (refCount.current >= 2) return;
     setDocTitle(docTitle);
+    
   },[])
 
 
   const setTimes = (target: LuxonDateTime) => {
     if (!target) return;
     const durations: DurationObjectUnits = GetDuration(target);
-  
-
-
     setDays(durations.days!);
     setHours(durations.hours!);
     setMinutes(durations.minutes!);
@@ -143,19 +157,46 @@ export const Timer = () => {
     setLabels(getLabels(days, hours, minutes, seconds));
   }
 
-
-
-
-
   useEffect(() => {
     if (!target) return;
     const interval = setInterval(() => setTimes(target), 200);
     return () => clearInterval(interval);
   }, []);
 
+  //(days === 0 && hours === 0 && minutes === 0 && seconds === 0
+
+
+  useEffect(() => {
+    setIsLoaded(true);
+  })
+
+
+  if (!isLoaded) {
+    return (<></>)
+  } 
+
+
+  else if (target && (days === 0 && hours === 0 && minutes === 0 && seconds === 0)){
+    return (<></>)
+  }
   
 
-  if (!(days === 0 && hours === 0 && minutes === 0 && seconds === 0 && targetDateTimeLabel)) {
+  else if (!target && (days === 0 && hours === 0 && minutes === 0 && seconds === 0)) {
+    return (
+      <div className="timer-wrapper">
+        <button className='back-button' onClick={() => navigate('/')} title='back-button'>◀ Back</button>
+        <div  className={'times'}>
+          <span className='timer-value'>Countdown not found</span>
+        </div>      
+      </div>
+    )
+  } 
+  
+  
+
+
+
+  else if (target) {
     return (
       <div className="timer-wrapper">
   
@@ -183,14 +224,8 @@ export const Timer = () => {
         <div className="date timer-label timer-item">{targetDateTimeLabel}</div>
       </div>
     )
-  } else {
-    return(
-      
-        
-        <></>
-      
-    )
   }
+    
   
   
   
