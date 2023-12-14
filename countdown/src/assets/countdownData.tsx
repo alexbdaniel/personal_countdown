@@ -6,14 +6,14 @@ export const countdownData = [
     urlName: 'japan',
     displayNameShort: 'Japan',
     displayName: 'Time remaining until Japan',
-    target: '2023-01-16T23:00:02.000Z'
+    target: '2023-01-16T23:00:00.000Z'
   },
   {
     id: '2',
     urlName: 'busselton',
     displayNameShort: 'Busselton',
     displayName: 'Time remaining until Busselton',
-    target: '2023-12-26T00:00:02.000Z'
+    target: '2023-12-27T00:00:00.000Z'
   }
 ]
 
