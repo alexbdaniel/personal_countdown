@@ -13,7 +13,7 @@ export const countdownData = [
     urlName: 'busselton',
     displayNameShort: 'Busselton',
     displayName: 'Time remaining until Busselton',
-    target: '2023-12-27T00:00:00.000Z'
+    target: '2023-12-26T23:00:00.000Z'
   }
 ]
 
