@@ -108,13 +108,6 @@ const setDocTitle = (docTitle: string): void => {
   }
 }
 
-const checkTargetExists = (target: any):boolean => {
-  if (target) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
 export const Timer = () => {
   const [labels, setLabels] = useState<ILabels>();
